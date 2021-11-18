@@ -79,7 +79,7 @@ class SPADE(nn.Module):
         self.mlp_beta = nn.Conv2d(nhidden, norm_nc, kernel_size=ks, padding=pw)
 
     def forward(self, x, segmap, degraded_image):
-
+        print("\n>>SPADE(nn.Module) forward")
         # Part 1. generate parameter-free normalized activations
         normalized = self.param_free_norm(x)
 
