@@ -49,7 +49,7 @@ class Downsample(nn.Module):
         self.pad = get_pad_layer(pad_type)(self.pad_sizes)
 
     def forward(self, inp):
-        print("\n>>Downsample(nn.Module)")
+        print("\n>>Downsample(nn.Module) forward")
         if self.filt_size == 1:
             if self.pad_off == 0:
                 return inp[:, :, :: self.stride, :: self.stride]
