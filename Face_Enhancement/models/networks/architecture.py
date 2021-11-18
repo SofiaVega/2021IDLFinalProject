@@ -47,6 +47,7 @@ class SPADEResnetBlock(nn.Module):
     # note the resnet block with SPADE also takes in |seg|,
     # the semantic segmentation map as input
     def forward(self, x, seg, degraded_image):
+        print("\n>>SPADEResnetBlock forward propagation")
         x_s = self.shortcut(x, seg, degraded_image)
 
         dx = self.conv_0(self.actvn(self.norm_0(x, seg, degraded_image)))
@@ -83,6 +84,7 @@ class ResnetBlock(nn.Module):
         )
 
     def forward(self, x):
+        print("\n>>ResnetBlock forward propagation")
         y = self.conv_block(x)
         out = x + y
         return out
@@ -113,6 +115,7 @@ class VGG19(torch.nn.Module):
                 param.requires_grad = False
 
     def forward(self, X):
+        print("\n>>VGG19 forward propagation")
         h_relu1 = self.slice1(X)
         h_relu2 = self.slice2(h_relu1)
         h_relu3 = self.slice3(h_relu2)
@@ -153,6 +156,7 @@ class SPADEResnetBlock_non_spade(nn.Module):
     # note the resnet block with SPADE also takes in |seg|,
     # the semantic segmentation map as input
     def forward(self, x, seg, degraded_image):
+        print("\n>>SPADEResnetBlock_non_spade")
         x_s = self.shortcut(x, seg, degraded_image)
 
         dx = self.conv_0(self.actvn(x))
