@@ -8,6 +8,7 @@ from data import online_dataset_for_old_photos as dts_ray_bigfile
 
 
 def CreateDataset(opt):
+    print("\n>>CreateDatasset")
     dataset = None
     if opt.training_dataset=='domain_A' or opt.training_dataset=='domain_B':
         dataset = dts_ray_bigfile.UnPairOldPhotos_SR()
