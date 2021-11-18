@@ -34,6 +34,7 @@ class Pix2PixModel(torch.nn.Module):
     # can't parallelize custom functions, we branch to different
     # routines based on |mode|.
     def forward(self, data, mode):
+        print("\n>>pix2pix model forward")
         input_semantics, real_image, degraded_image = self.preprocess_input(data)
 
         if mode == "generator":
