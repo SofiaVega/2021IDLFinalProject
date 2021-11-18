@@ -107,6 +107,7 @@ class UNet(nn.Module):
             self = DataParallelWithCallback(self)
 
     def forward(self, x):
+	print("\n>>UNet(nn.Module) forward")
         x = self.first(x)
 
         blocks = []
@@ -162,6 +163,8 @@ class UNetUpBlock(nn.Module):
         return layer[:, :, diff_y : (diff_y + target_size[0]), diff_x : (diff_x + target_size[1])]
 
     def forward(self, x, bridge):
+	print("\n>>UNetUpBlock(nn.Module) forward")
+	print("
         up = self.up(x)
         crop1 = self.center_crop(bridge, up.shape[2:])
         out = torch.cat([up, crop1], 1)
@@ -221,6 +224,7 @@ class UnetGenerator(nn.Module):
         )  # add the outermost layer
 
     def forward(self, input):
+	print("\n>>UnetGenerator(nn.Module) forward")
         return self.model(input)
 
 
@@ -289,6 +293,7 @@ class UnetSkipConnectionBlock(nn.Module):
         self.model = nn.Sequential(*model)
 
     def forward(self, x):
+	print("\n>>UnetSkipConnectionBlock(nn.Module)")
         if self.outermost:
             return self.model(x)
         else:  # add skip connections
