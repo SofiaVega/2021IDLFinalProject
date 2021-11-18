@@ -10,6 +10,7 @@ class BaseDataLoader():
         pass
 
     def load_data():
+        print("\n>>BaseDataLoader()")
         return None
 
         
