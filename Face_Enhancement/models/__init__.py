@@ -6,6 +6,7 @@ import torch
 
 
 def find_model_using_name(model_name):
+    print("\n>>find_model_using_name")
     # Given the option --model [modelname],
     # the file "models/modelname_model.py"
     # will be imported.
@@ -32,11 +33,13 @@ def find_model_using_name(model_name):
 
 
 def get_option_setter(model_name):
+    print("\n>>get_option_setter")
     model_class = find_model_using_name(model_name)
     return model_class.modify_commandline_options
 
 
 def create_model(opt):
+    print("\n>>create_model")
     model = find_model_using_name(opt.model)
     instance = model(opt)
     print("model [%s] was created" % (type(instance).__name__))
