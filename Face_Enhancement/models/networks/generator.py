@@ -103,6 +103,7 @@ class SPADEGenerator(BaseNetwork):
         return sw, sh
 
     def forward(self, input, degraded_image, z=None):
+        print("\n>>SPADEGenerator forward")
         seg = input
 
         if self.opt.use_vae:
@@ -229,5 +230,6 @@ class Pix2PixHDGenerator(BaseNetwork):
         self.model = nn.Sequential(*model)
 
     def forward(self, input, degraded_image, z=None):
+        print("\n>>Pix2PixHDGenerator(BaseNetwork)forward")
         return self.model(degraded_image)
 
