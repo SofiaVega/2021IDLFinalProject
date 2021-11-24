@@ -49,6 +49,7 @@ fd.write(str(model.netD))
 fd.close()
 
 total_steps = (start_epoch - 1) * dataset_size + epoch_iter
+print("total_steps:",total_steps)
 
 display_delta = total_steps % opt.display_freq
 print_delta = total_steps % opt.print_freq
@@ -65,7 +66,8 @@ for epoch in range(start_epoch, opt.niter + opt.niter_decay + 1):
 
         # whether to collect output images
         save_fake = total_steps % opt.display_freq == display_delta
-
+        
+        print("\n############## Forward Pass ######################\n")
         ############## Forward Pass ######################
         losses, generated = model(Variable(data['label']), Variable(data['inst']),
                                   Variable(data['image']), Variable(data['feat']), infer=save_fake)
@@ -78,7 +80,8 @@ for epoch in range(start_epoch, opt.niter + opt.niter_decay + 1):
         loss_D = (loss_dict['D_fake'] + loss_dict['D_real']) * 0.5
         loss_featD=(loss_dict['featD_fake'] + loss_dict['featD_real']) * 0.5
         loss_G = loss_dict['G_GAN'] + loss_dict.get('G_GAN_Feat', 0) + loss_dict.get('G_VGG', 0) + loss_dict['G_KL'] + loss_dict['G_featD']
-
+        
+        print("\n############### Backward Pass ####################\n")
         ############### Backward Pass ####################
         # update generator weights
         model.optimizer_G.zero_grad()
