@@ -174,12 +174,13 @@ def zero_mask(size):
 
 class UnPairOldPhotos_SR(BaseDataset):  ## Synthetic + Real Old
     def initialize(self, opt):
+        print("this pair old photos with hole is initializing")
         self.opt = opt
         self.isImage = 'domainA' in opt.name
         self.task = 'old_photo_restoration_training_vae'
         self.dir_AB = opt.dataroot
         if self.isImage:
-
+            print("is image")
             self.load_img_dir_L_old=os.path.join(self.dir_AB,"Real_L_old.bigfile")
             self.load_img_dir_RGB_old=os.path.join(self.dir_AB,"Real_RGB_old.bigfile")
             self.load_img_dir_clean=os.path.join(self.dir_AB,"VOC_RGB_JPEGImages.bigfile")
@@ -187,11 +188,16 @@ class UnPairOldPhotos_SR(BaseDataset):  ## Synthetic + Real Old
             self.loaded_imgs_L_old=BigFileMemoryLoader(self.load_img_dir_L_old)
             self.loaded_imgs_RGB_old=BigFileMemoryLoader(self.load_img_dir_RGB_old)
             self.loaded_imgs_clean=BigFileMemoryLoader(self.load_img_dir_clean)
+            print(self.loaded_imgs_L_old)
+            print(self.loaded_imgs_RGB_old)
+            print(self.loaded_imgs_clean)
 
         else:
+            print("is not image")
             # self.load_img_dir_clean=os.path.join(self.dir_AB,self.opt.test_dataset)
             self.load_img_dir_clean=os.path.join(self.dir_AB,"VOC_RGB_JPEGImages.bigfile")
             self.loaded_imgs_clean=BigFileMemoryLoader(self.load_img_dir_clean)
+        
 
         ####
         print("-------------Filter the imgs whose size <256 in VOC-------------")
