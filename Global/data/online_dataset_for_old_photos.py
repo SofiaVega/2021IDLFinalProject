@@ -237,6 +237,8 @@ class UnPairOldPhotos_SR(BaseDataset):  ## Synthetic + Real Old
                 sampled_dataset=self.filtered_imgs_clean
                 self.load_img_dir=self.load_img_dir_clean
                 degradation=1
+            print(sampled_dataset)
+            print(len(sampled_dataset))
         else:
 
             sampled_dataset=self.filtered_imgs_clean
