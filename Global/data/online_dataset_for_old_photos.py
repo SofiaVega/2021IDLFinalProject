@@ -380,11 +380,13 @@ class PairOldPhotos(BaseDataset):
 
 class PairOldPhotos_with_hole(BaseDataset):
     def initialize(self, opt):
+        print("this pair old photos with hole is initializing")
         self.opt = opt
         self.isImage = 'imagegan' in opt.name
         self.task = 'old_photo_restoration_training_mapping'
         self.dir_AB = opt.dataroot
         if opt.isTrain:
+            print("is train")
             self.load_img_dir_clean= os.path.join(self.dir_AB, "VOC_RGB_JPEGImages.bigfile")
             self.loaded_imgs_clean = BigFileMemoryLoader(self.load_img_dir_clean)
 
@@ -401,8 +403,10 @@ class PairOldPhotos_with_hole(BaseDataset):
             len(self.loaded_imgs_clean), len(self.filtered_imgs_clean)))
 
         else:
+            print("is not train")
             self.load_img_dir=os.path.join(self.dir_AB,opt.test_dataset)
             self.loaded_imgs=BigFileMemoryLoader(self.load_img_dir)
+            print(self.load_img_dir)
 
         self.loaded_masks = BigFileMemoryLoader(opt.irregular_mask)
 
